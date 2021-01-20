@@ -1,0 +1,1 @@
+document.getElementsByTagName('body')[0].innerHTML = '<p>12121</p>'
