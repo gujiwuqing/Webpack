@@ -1,7 +1,8 @@
-const path = require('path')
+const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
+    mode: 'development',
     entry: './src/index.js',
     module: {
         rules: [
@@ -10,10 +11,17 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/
             }, {
-                test: /\.css$/,
+                test: /\.less$/,
                 use: [
                     'style-loader',
-                    'css-loader'
+                    'css-loader',
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/,
+                use: [
+                    'file-loader'
                 ]
             }
         ]
@@ -31,6 +39,7 @@ module.exports = {
         contentBase: './dist'
     },
     output: {
-        filename: "bundle.js"
+        filename: "bundle.js",
+        path: resolve(__dirname, 'build')
     }
 }
